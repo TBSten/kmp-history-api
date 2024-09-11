@@ -8,8 +8,11 @@ plugins {
 
 kotlin {
     wasmJs {
-        browser()
+        browser {
+            commonWebpackConfig {}
+        }
         binaries.executable()
+
     }
 
     sourceSets {
