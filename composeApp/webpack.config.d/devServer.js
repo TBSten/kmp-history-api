@@ -1,19 +1,23 @@
 
 console.log(config.module)
-config.devServer = {
-    historyApiFallback: {
-        rewrites: [{ from: /^\/test$/, to: '/index.html' }],
-    }
+if (!config.devServer) config.devServer = {}
+
+console.log("config.devServer:", config.devServer)
+//config.devServer = {
+//    historyApiFallback: {
+//        rewrites: [{ from: /^.*$/, to: '/index.html' }],
+//    }
+//}
+
+// config.devServer.historyApiFallback = true
+config.devServer.historyApiFallback = {
+    rewrites: [
+        { from: /^.*KmpSpa-composeApp-wasm-js\.wasm$/, to: "/KmpSpa-composeApp-wasm-js.wasm" },
+        { from: /^.*6337cac22290173dbf0b\.wasm$/, to: "/6337cac22290173dbf0b.wasm" },
+        { from: /^.*$/, to: '/index.html' },
+    ],
 }
 
-//
-//module.exports = {
-//  // 他の設定...
-//  devServer: {
-//    historyApiFallback: {
-//      rewrites: [
-//        { from: /./, to: '/404.html' }, // 404にリダイレクト
-//      ],
-//    },
-//  },
-//};
+const port = process.env["PORT"] ?? "8080"
+
+config.devServer.port = port
